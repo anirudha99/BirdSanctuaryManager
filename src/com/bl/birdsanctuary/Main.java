@@ -116,7 +116,16 @@ public class Main {
 				birdname = scanner.next();
 				birdsanctuaryrepository = BirdSanctuaryRepository.getInstance();
 				Bird removeBird = birdsanctuaryrepository.getBird(birdname);
-				birdsanctuaryrepository.remove(removeBird);
+				
+				try{
+					if(removeBird == null)
+						throw new BirdNotFoundException("Bird not found");
+					birdsanctuaryrepository.remove(removeBird);
+					System.out.println(birdname + " removed");
+				}
+				catch(BirdNotFoundException e){
+					System.out.println("Exception occured");
+				}
 				break;
 			case 3: 
 				viewLayer.print();
